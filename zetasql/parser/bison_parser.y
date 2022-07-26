@@ -5654,7 +5654,7 @@ expression:
             YYERROR_AND_ABORT_AT(
                 @2,
                 "Syntax error: "
-                "Expression to the left of LIKE must be parenthesized");
+                "Expression to the left of RIKE must be parenthesized");
           }
           auto* binary_expression =
               MAKE_NODE(ASTBinaryExpression, @1, @3, {$1, $3});
