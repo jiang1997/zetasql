@@ -1184,6 +1184,7 @@ using zetasql::ASTDropStatement;
 %type <node> opt_language
 %type <node> opt_like_string_literal
 %type <node> opt_like_path_expression
+%type <node> opt_rlike_string_literal
 %type <node> opt_limit_offset_clause
 %type <node> opt_config_clause
 %type <node> opt_maxsize
@@ -3574,6 +3575,10 @@ show_statement:
       {
         $$ = MAKE_NODE(ASTShowStatement, @$, {$2, $3, $4});
       }
+    | "SHOW" show_target opt_from_path_expression opt_rlike_string_literal
+      {
+        $$ = MAKE_NODE(ASTShowStatement, @$, {$2, $3, $4});
+      }
     | "SHOW" show_with_name_target target_name
       {
         $$ = MAKE_NODE(ASTShowStatement, @$, {$2, $3});
@@ -3645,6 +3650,13 @@ opt_like_path_expression:
         $$ = $2;
       }
     | /* Nothing */ { $$ = nullptr; }
+    ;
+
+opt_rlike_string_literal:
+    "RLIKE" string_literal
+      {
+        $$ = $2;
+      }
     ;
 
 opt_clone_table:
