@@ -226,7 +226,19 @@ class ASTShowStatement final : public ASTStatement {
     return optional_target_name_;
   }
 
+  // All supported predicates.
+  enum Pd {
+    NOT_SET,
+    LIKE,         // "LIKE"
+    RLIKE,        // "RLIKE"
+  };
+
+  void set_pd(Pd pd) { pd_ = pd; }
+  Pd pd() const { return pd_; }
+
  private:
+  Pd pd_ = NOT_SET;
+  
   void InitFields() final {
     FieldLoader fl(this);
     fl.AddRequired(&identifier_);
