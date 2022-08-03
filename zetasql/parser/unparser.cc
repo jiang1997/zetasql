@@ -871,13 +871,19 @@ void Unparser::visitASTShowStatement(const ASTShowStatement* node, void* data) {
     print("FROM");
     node->optional_name()->Accept(this, data);
   }
-  if (node->optional_like_string() != nullptr) {
-    print("LIKE");
-    node->optional_like_string()->Accept(this, data);
-  }
-  if (node->optional_rlike_string() != nullptr) {
-    print("RLIKE");
-    node->optional_rlike_string()->Accept(this, data);
+  if (node->optional_predicate_string() != nullptr) {
+    switch(node->pd()) {
+        case zetasql::ASTShowStatement::Pd::LIKE: {
+          print("LIKE");
+          node->optional_predicate_string()->Accept(this, data);
+          break;
+        }
+        case zetasql::ASTShowStatement::Pd::RLIKE: {
+          print("RLIKE");
+          node->optional_predicate_string()->Accept(this, data);
+          break;
+        }
+    }
   }
 }
 

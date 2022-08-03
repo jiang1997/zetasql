@@ -79,6 +79,15 @@ ShowStatement [0-31]
 SHOW TABLES LIKE 'KitchenSync%'
 ==
 
+show TABLES rlike 'KitchenSync.';
+--
+ShowStatement [0-32]
+  Identifier(TABLES) [5-11]
+  StringLiteral('KitchenSync.') [18-32]
+--
+SHOW TABLES RLIKE 'KitchenSync.'
+==
+
 show COLUMNS from KitchenSync;
 --
 ShowStatement [0-29]
