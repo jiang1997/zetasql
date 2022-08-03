@@ -3578,7 +3578,6 @@ show_statement:
         show_statement_with_like->set_pd(zetasql::ASTShowStatement::LIKE);
         $$ = show_statement_with_like;
 
-        // $$ = MAKE_NODE(ASTShowStatement, @$, {$2, $3, $4});
       }
     | "SHOW" show_target opt_from_path_expression opt_rlike_string_literal
       {
@@ -3587,7 +3586,6 @@ show_statement:
         show_statement_with_rlike->set_pd(zetasql::ASTShowStatement::RLIKE);
         $$ = show_statement_with_rlike;
 
-        // $$ = MAKE_NODE(ASTShowStatement, @$, {$2, $3, $4});
       }
     | "SHOW" show_with_name_target target_name
       {

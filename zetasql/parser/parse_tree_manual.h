@@ -215,6 +215,9 @@ class ASTShowStatement final : public ASTStatement {
       NonRecursiveParseTreeVisitor* visitor) const override;
   const ASTIdentifier* identifier() const { return identifier_; }
   const ASTPathExpression* optional_name() const { return optional_name_; }
+  const ASTStringLiteral* optional_predicate_string() const {
+    return optional_predicate_string_;
+  }  
   const ASTStringLiteral* optional_like_string() const {
     return optional_like_string_;
   }
@@ -244,12 +247,14 @@ class ASTShowStatement final : public ASTStatement {
     fl.AddRequired(&identifier_);
     fl.AddOptional(&optional_target_name_, AST_TARGET_NAME);
     fl.AddOptional(&optional_name_, AST_PATH_EXPRESSION);
-    fl.AddOptional(&optional_like_string_, AST_STRING_LITERAL);
-    fl.AddOptional(&optional_rlike_string_, AST_STRING_LITERAL);
+    fl.AddOptional(&optional_predicate_string_, AST_STRING_LITERAL);
+    // fl.AddOptional(&optional_like_string_, AST_STRING_LITERAL);
+    // fl.AddOptional(&optional_rlike_string_, AST_STRING_LITERAL);
   }
   const ASTIdentifier* identifier_ = nullptr;
   const ASTTargetName* optional_target_name_ = nullptr;
   const ASTPathExpression* optional_name_ = nullptr;
+  const ASTStringLiteral* optional_predicate_string_ = nullptr;
   const ASTStringLiteral* optional_like_string_ = nullptr;
   const ASTStringLiteral* optional_rlike_string_ = nullptr;
 };
